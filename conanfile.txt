@@ -1,0 +1,14 @@
+[requires]
+fmt/9.0.0
+glfw/3.3.7
+imgui/cci.20220621+1.88.docking
+
+[generators]
+cmake
+
+[imports]
+./res/bindings, imgui_impl_glfw.cpp -> ../src/bindings
+./res/bindings, imgui_impl_opengl3.cpp -> ../src/bindings
+./res/bindings, imgui_impl_glfw.h -> ../src/bindings
+./res/bindings, imgui_impl_opengl3.h -> ../src/bindings
+./res/bindings, imgui_impl_opengl3_loader.h -> ../src/bindings
