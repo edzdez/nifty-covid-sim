@@ -25,6 +25,7 @@ auto sim::State::step() -> void
     std::unordered_set<size_t> newInfections;
     for (int i = 0; i < sim::ROWS * sim::COLS; ++i)
     {
+        /*
         auto &p1 = m_grid[i];
         if (p1.status() == Person::Status::Infected && p1.isContagious())
         {
@@ -46,6 +47,30 @@ auto sim::State::step() -> void
                         if (1 + rand() % 100 <= INFECTION_PROBABILITY)
                             newInfections.insert(p2Idx);
                     }
+                }
+            }
+        }
+        */
+        auto &p1 = m_grid[i];
+        if (p1.status() != Person::Status::Healthy)
+            continue;
+
+        for (int dx = -1; dx <= 1; ++dx)
+        {
+            for (int dy = -1; dy <= 1; ++dy)
+            {
+                if (dx == 0 && dy == 0)
+                    continue;
+
+                auto j = i + dx + (dy * sim::COLS);
+                if (j < 0 || j >= sim::COLS * sim::ROWS)
+                    continue;
+
+                auto &p2 = m_grid[j];
+                if (!(p1.isCompliant() && p2.isCompliant()))
+                {
+                    if (p1.contact(p2))
+                        newInfections.insert(i);
                 }
             }
         }

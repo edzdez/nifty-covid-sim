@@ -46,9 +46,14 @@ auto Person::tick() -> TickResult
     return TickResult::Ran;
 }
 
-auto Person::contact(Person &other) -> void
+auto Person::contact(Person &other) -> bool
 {
-    // TODO
+    assert(status() == Status::Healthy);
+
+    if (other.status() == Status::Infected)
+        return 1 + rand() % 100 <= sim::INFECTION_PROBABILITY;
+
+    return false;
 }
 
 auto Person::die() -> void

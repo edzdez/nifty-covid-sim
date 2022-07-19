@@ -1,6 +1,7 @@
 #ifndef NIFTY_COVID_SIM_PERSON_H
 #define NIFTY_COVID_SIM_PERSON_H
 
+#include <cassert>
 #include <cstdint>
 #include <cstdlib>
 
@@ -36,7 +37,7 @@ class Person
     auto setCompliance(bool compliance) -> void;
 
     auto tick() -> TickResult;
-    auto contact(Person &other) -> void;
+    auto contact(Person &other) -> bool;
 
   private:
     Status m_status = Status::Healthy;
